@@ -1,0 +1,84 @@
+Quiz draft — Villanova trivia / final exam unit
+(Pulling from old quizzes + my notes from last fall. Need to clean up for LMS upload before Friday.)
+
+Question 1
+What year was Villanova University founded?
+a. 1825
+b. 1842
+*c. 1859
+d. 1876
+Correct answer: B
+
+#2 (T/F)
+True or False: Villanova won the NCAA Men's Basketball Championship in 1985, 2016, and 2018.
+(Answer: TRUE)
+Use blue font and underlining for the text Villanova.
+
+Question 3
+Who was the head coach of Villanova's men's basketball team during their 2016 and 2018 NCAA
+championship wins? It wasn't Coach K (he was at Duke), not Bill Self (Kansas), and definitely not
+John Calipari (Kentucky) — the right answer is Jay Wright.
+Options:
+- Mike Krzyzewski
+- Bill Self
+- John Calipari
+- Jay Wright
+
+4) Villanova's motto "Veritas, Unitas, Caritas" translates to:
+1) Faith, Hope, Love
+2) Truth, Unity, Love
+3) Peace, Justice, Mercy
+4) Wisdom, Knowledge, Understanding
+(answer = #2)
+
+5. Which building houses Villanova's main library?
+a. Kennedy Hall
+b. Falvey Memorial Library
+c. St. Mary's Hall
+d. Vic Maggitti Hall
+(Note: Vic Maggitti Hall is the new library location starting Fall 2026 — current answer is still B
+until then.)
+
+ESSAY
+In a 2–3 paragraph response, describe one Villanova tradition or aspect of campus life that you
+believe contributes meaningfully to the undergraduate student experience. Provide a specific
+example to support your view.
+
+7. What is the official school color combination at Villanova?
+- Blue and white
+- Navy and gold
+- Green and white
+(Note to self — I think I lost the answer key for this one, need to double-check before posting)
+Make Blue, Navy, Gold and Green colored text in the question.
+
+Q8
+Approximately how many undergraduate students are enrolled at Villanova University?
+i. About 1,500
+ii. About 7,000
+iii. About 14,000
+iv. About 25,000
+→ ii
+
+9 — multi-answer
+Which of the following are current Big East Conference schools? (select all that apply)
+☑ Villanova
+☑ Georgetown
+☑ Marquette
+☐ Notre Dame
+☐ Syracuse
+
+BONUS QUESTION:
+10. (numerical fill-in)
+How many NCAA men's basketball national championships has Villanova won? _______
+(answer: 3 — 1985, 2016, 2018)
+
+Q11 — algorithmic / calculated question
+For a Villanova class of n students where p% passed the final exam, calculate how many students
+passed.
+Variables:
+  n = number of students (range 25–55, integer)
+  p = pass percentage (range 60–95, integer)
+Formula: passed = round(n × p / 100)
+Tolerance: ±1 student
+
+Last edited 5/11/2026 — still need to write 2 more multi-choice questions on Villanova history. 

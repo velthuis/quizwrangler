@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: "QuizWrangler: an AI skill for converting question documents into D2L Brightspace's CSV import format"
+message: "If you use this skill or adapt it for your institution, please cite it."
+type: software
+authors:
+  - family-names: Velthuis
+    given-names: Raisa
+    affiliation: Villanova University
+repository-code: "https://github.com/velthuis/quizwrangler"
+abstract: >-
+  An AI skill that converts unstructured instructor question documents into
+  D2L Brightspace's CSV import format, covering multiple choice, true/false,
+  written response, short answer, multi-select, matching, and ordering.
+  Question types the CSV format cannot represent are flagged with a spec for
+  manual entry in Brightspace's question editor. Includes a validator that
+  checks the generated file before upload. Developed for the VITAL Teaching
+  and Learning Strategies Program at Villanova University.
+keywords:
+  - Brightspace
+  - D2L
+  - assessment
+  - educational technology
+  - large language models
+  - faculty development
+license: MIT
+date-released: "2026-07-24"
+version: "1.0.0"

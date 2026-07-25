@@ -1,0 +1,101 @@
+NewQuestion,TF,,,
+Title,NCAA Championships,,,
+QuestionText,"<p><span style=""color: blue;""><u>Villanova</u></span> won the NCAA Men's Basketball Championship in 1985, 2016, and 2018.</p>",HTML,
+Points,1,,,
+Difficulty,1,,,
+TRUE,100,,,
+FALSE,0,,,
+,,,,
+NewQuestion,MC,,,
+Title,Championship Head Coach,,,
+QuestionText,Who was the head coach of Villanova's men's basketball team during their 2016 and 2018 NCAA championship wins?,,,
+Points,1,,,
+Difficulty,1,,,
+Option,0,Mike Krzyzewski,,
+Option,0,Bill Self,,
+Option,0,John Calipari,,
+Option,100,Jay Wright,,
+,,,,
+NewQuestion,MC,,,
+Title,Villanova Motto Translation,,,
+QuestionText,"Villanova's motto ""Veritas, Unitas, Caritas"" translates to:",,,
+Points,1,,,
+Difficulty,1,,,
+Option,0,"Faith, Hope, Love",,
+Option,100,"Truth, Unity, Love",,
+Option,0,"Peace, Justice, Mercy",,
+Option,0,"Wisdom, Knowledge, Understanding",,
+,,,,
+NewQuestion,MC,,,
+Title,Main Library Building,,,
+QuestionText,Which building houses Villanova's main library?,,,
+Points,1,,,
+Difficulty,1,,,
+Option,0,Kennedy Hall,,
+Option,100,Falvey Memorial Library,,
+Option,0,St. Mary's Hall,,
+Option,0,Vic Maggitti Hall,,
+,,,,
+NewQuestion,WR,,,
+Title,Villanova Campus Tradition Essay,,,
+QuestionText,"In a 2-3 paragraph response, describe one Villanova tradition or aspect of campus life that you believe contributes meaningfully to the undergraduate student experience. Provide a specific example to support your view.",,,
+Points,1,,,
+Difficulty,1,,,
+,,,,
+NewQuestion,MC,,,
+Title,Undergraduate Enrollment,,,
+QuestionText,Approximately how many undergraduate students are enrolled at Villanova University?,,,
+Points,1,,,
+Difficulty,1,,,
+Option,0,"About 1,500",,
+Option,100,"About 7,000",,
+Option,0,"About 14,000",,
+Option,0,"About 25,000",,
+,,,,
+NewQuestion,MS,,,
+Title,Big East Conference Schools,,,
+QuestionText,Which of the following are current Big East Conference schools?,,,
+Points,1,,,
+Difficulty,1,,,
+Scoring,RightAnswers,,,
+Option,1,Villanova,,
+Option,1,Georgetown,,
+Option,1,Marquette,,
+Option,0,Notre Dame,,
+Option,0,Syracuse,,
+,,,,
+NewQuestion,SA,,,
+Title,NCAA Championships Count,,,
+QuestionText,How many NCAA men's basketball national championships has Villanova won?,,,
+Points,1,,,
+Difficulty,1,,,
+InputBox,1,40,,
+Answer,100,3,,
+Answer,100,three,,
+Answer,100,Three,,
+,,,,
+//FLAGS:
+//Q1 (Villanova founding year) - Contradictory answer key. The option list marks "*c. 1859" but the
+//  instructor note below it reads "Correct answer: B" (1842). Two different answers; not guessed.
+//  Instructor must confirm which is intended before this question can be imported.
+//Q5 (Main library building) - Time-dependent answer. Source note reads "Vic Maggitti Hall is the new
+//  library location starting Fall 2026 - current answer is still B until then." Encoded here as
+//  Falvey Memorial Library. Confirm this is still correct for your term before importing.
+//Q7 (Official school colors) - No correct answer identifiable. Source note reads "I think I lost the
+//  answer key for this one, need to double-check before posting." Three options given, none marked.
+//  Omitted from the CSV entirely rather than guessed. The request to show Blue, Navy, Gold and
+//  Green as colored text can be applied in the question editor when the question is re-created.
+//Q10 (NCAA championships count) - Converted. The "BONUS QUESTION" label cannot be encoded in CSV.
+//  After import, open the question in the quiz editor and enable Bonus.
+//Q11 (Students passing the final) - Arithmetic/algorithmic question. NOT supported by CSV import.
+//  Brightspace's native editor does support this type; it just cannot be batch-imported. Enter it
+//  manually in the question editor using this spec:
+//    Type: Arithmetic
+//    Question Text: For a Villanova class of {n} students where {p}% passed the final exam,
+//                   calculate how many students passed.
+//    Variables:
+//      n - Min 25, Max 55, Decimal Places 0, Step 1
+//      p - Min 60, Max 95, Decimal Places 0, Step 1
+//    Formula: ({n}*{p}/100)
+//    Precision: 0 decimal places, not enforced
+//    Tolerance: 1, units

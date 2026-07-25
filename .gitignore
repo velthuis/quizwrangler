@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.DS_Store/*
+._*
+
+# AI
+.claude/
+CLAUDE.md
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local scratch
+*.local.csv
+*.local.zip
+scratch/
+
+# Build output (attached to Releases, not committed)
+dist/
+
+# Local working materials
+backup/
+docs/
+temp/
+tests/
