@@ -5,8 +5,9 @@
 | Skill | Input | Output |
 |---|---|---|
 | **`quizwrangler-csv`** | Questions in a Word document, PDF, spreadsheet, or pasted text | A Brightspace-ready `.csv` with support for: multiple choice, true/false, written response, short answer, multi-select, matching, ordering |
+| **`quizwrangler-qti`** | A complete quiz, mixed question set, or pool in the same source formats | A QTI `.zip` containing standard and advanced types, mixed pools, HTML, MathML, and embedded images |
 
-Question types the CSV format cannot carry (i.e., algorithmic/calculated, fill-in-the-blanks, multi-short-answer) are flagged with a spec you can enter in Brightspace's question editor by hand.
+Use CSV for an ordinary standard-question bank, especially when the questions should land in the Question Library. Use QTI for a complete quiz package, a pool, an embedded image, or a mix of standard and advanced types.
 
 ---
 
@@ -14,11 +15,11 @@ Question types the CSV format cannot carry (i.e., algorithmic/calculated, fill-i
 
 Importing quizzes into Brightspace requires precisely formatted files.
 However, instructors may have accumulated questions in different formats, such as notes from a previous term, with answers marked inconsistently, or with inconsistent numbering.
-Additionally, the skill can accommodate formatting preferences, such as font size, font color, or embedding equations, which can be a tedious manual process.
+The skills also preserve meaningful formatting, including HTML, color, subscripts, superscripts, and equations.
 
-This repo contains a prompt that you run with your preferred AI assistant. `quizwrangler-csv` readies the questions for import, and flags the cases the CSV importer cannot represent (algorithmic questions with randomized values per student, fill-in-the-blanks, and multi-short-answer questions) with instructions for manual entry.
+This repo contains two reusable prompts. `quizwrangler-csv` readies standard questions for direct upload. `quizwrangler-qti` builds a complete ZIP and handles the same standard types plus Arithmetic, Fill in the Blanks, Multi-Short Answer, and random pools.
 
-The skill also flags potential issues in the questions such as contradictory answer keys, missing keys, and important notes left by the instructor.
+Both skills flag potential issues such as contradictory answer keys, missing keys, and important notes left by the instructor.
 
 ### Example
 
@@ -60,7 +61,7 @@ This refusal is deliberate to avoid problems and allow the instructor to fix the
 
 ### If you don't have questions yet
 
-The skill converts questions, but it doesn't write them. If you need questions too, you can first ask your AI assistant to write them for you, which you can then check. For example, you can ask: 
+The skills convert questions, but they don't write them. If you need questions too, you can first ask your AI assistant to write them for you, which you can then check. For example, you can ask:
 > "Draft 10 multiple-choice questions on photosynthesis for an intro biology course, four options each, mark the correct answer."
 
 While you could also combine both steps in one prompt ("write the questions, then convert them for Brightspace"), the two-step approach is the better habit as it puts a checkpoint between writing the questions and importing the file.
@@ -69,11 +70,11 @@ While you could also combine both steps in one prompt ("write the questions, the
 
 ## Install
 
-The skill is a plain Markdown file.
+Each skill is a folder containing Markdown instructions and, where needed, bundled references.
 How you load it depends on your assistant; pick the one you use.
 
-- On **Claude Desktop, claude.ai, or ChatGPT** you only need the ready-made Release ZIP, nothing from the repo. 
-Download `quizwrangler-csv.zip` from [Releases](https://github.com/velthuis/quizwrangler/releases), which is already in the structure the uploader expects.
+- On **Claude Desktop, Cowork, claude.ai, or ChatGPT** you only need the ready-made Release ZIPs, nothing from the repo.
+Download `quizwrangler-csv.zip` and `quizwrangler-qti.zip` from [Releases](https://github.com/velthuis/quizwrangler/releases), which are already in the structure the uploader expects.
 You can then add the skill to your assistant by uploading the ZIP in the app's skill settings; the exact steps for each app follow below.
 
 > ⚠️ **Don't use GitHub's green "Code → Download ZIP" button for this.**
@@ -92,24 +93,27 @@ git clone https://github.com/velthuis/quizwrangler.git
 ### Platform-specific instructions
 
 <details>
-<summary><b>Claude Desktop or claude.ai (no command line)</b></summary>
+<summary><b>Claude Desktop, Cowork, or claude.ai (no command line)</b></summary>
 
 1. Turn on **Settings → Capabilities → Code execution and file creation**; skills won't run without it.
    *(On Team or Enterprise plans an owner enables this in Organization settings.)*
 2. In settings, navigate to **Skills** (under Customize), click **Add**, then **Upload a skill**.
-3. Pick `quizwrangler-csv.zip`. (Selecting [`SKILL.md`](https://github.com/velthuis/quizwrangler/blob/main/skills/quizwrangler-csv/SKILL.md) from the quizwrangler-csv folder instead can work as well).
+3. Pick `quizwrangler-csv.zip`.
+4. Repeat for `quizwrangler-qti.zip`.
 
 Uploaded skills are private to your account and can be toggled on and off in the skills list.
+The same uploaded skill is available in Claude chat and Cowork. The QTI ZIP includes its own standard-library validator, so it does not depend on a checkout of this repository.
 
 </details>
 
 <details>
 <summary><b>ChatGPT</b></summary>
 
-ChatGPT supports the same skill format, so the Release ZIP above works unchanged.
+ChatGPT can upload the QuizWrangler Release ZIPs without modification.
 
-1. Go to [https://chatgpt.com/skills](https://chatgpt.com/skills), click **+**, then **Create skill → Upload a skill**.
-2. Pick `quizwrangler-csv.zip`.
+1. Open [Skills in ChatGPT](https://chatgpt.com/skills). If that link does not open the Skills page, use **Plugins → Skills** in the sidebar instead.
+   Select **Create**, then **Upload**.
+2. Pick `quizwrangler-csv.zip`, then repeat for `quizwrangler-qti.zip`.
 3. ChatGPT scans an uploaded skill before enabling it; most become available as soon as the scan finishes.
 
 On Business or Enterprise workspaces an admin may need to enable them first; if you don't see a Skills option, check with your IT group.
@@ -120,7 +124,7 @@ On Business or Enterprise workspaces an admin may need to enable them first; if 
 <details>
 <summary><b>Claude Code</b></summary>
 
-Copy the skill folder named `quizwrangler-csv` into your skills directory. Two locations work:
+Copy both folders inside `skills/` into your skills directory. Two locations work:
 
 - **User-level**: `~/.claude/skills` in your home folder makes skills available in every folder you run Claude Code from. Use this if you expect to use the skill broadly.
 - **Project-level**: `.claude/skills` inside any one folder makes them available only when Claude Code runs in that folder. This is useful if you keep teaching material in one place and prefer a narrower scope.
@@ -143,13 +147,14 @@ For a project-level install, use `<your folder>/.claude/skills` as the destinati
 
 Without a terminal, copy the skill folder by hand into `.claude\skills` in your home folder (`C:\Users\<you>\.claude\skills` on Windows, `/Users/<you>/.claude/skills` on macOS), creating it if it doesn't exist.
 Note that File Explorer or Finder may hide folders starting with a dot. 
+Keep each complete skill folder together. In particular, `quizwrangler-qti/references/` and `quizwrangler-qti/scripts/` are required parts of the QTI skill.
 
 </details>
 
 <details>
 <summary><b>Codex CLI</b></summary>
 
-OpenAI's Codex CLI reads the same skill format from its own directories: `~/.codex/skills` (user-level, available everywhere) or `.codex/skills` inside a project folder (that folder only). Copy the skill folder named `quizwrangler-csv` there.
+OpenAI's Codex CLI loads QuizWrangler skill folders from its own directories: `~/.codex/skills` (user-level, available everywhere) or `.codex/skills` inside a project folder (that folder only). Copy both skill folders there.
 
 User-level install, macOS or Linux (Terminal):
 
@@ -165,29 +170,37 @@ New-Item -ItemType Directory -Force -Path "$HOME\.codex\skills"
 Copy-Item -Recurse -Force .\quizwrangler\skills\* "$HOME\.codex\skills\"
 ```
 
+When a skill includes `agents/openai.yaml`, it supplies OpenAI-facing display metadata and a default prompt. `SKILL.md`, references, and scripts define the skill's behavior.
+
 </details>
 
 <details>
 <summary><b>Microsoft 365 Copilot</b></summary>
 
-Copilot Chat (Basic) has no skills folder; each skill becomes a saved **agent** you can reuse.
+These instructions target the standard Microsoft 365 Copilot configuration available at many universities. It uses saved agents rather than skill folders. Create separate CSV and QTI agents with concise instructions that fit your institution's needs. Agent Builder limits instructions to 8,000 characters, so the complete QuizWrangler skill files are not intended to be pasted in directly. Copilot Studio and premium plans may provide additional options.
 
-1. Sign in to your institution's Microsoft 365 portal.
-2. Open **Copilot** in **Work** mode (look for **Copilot with internal data protection** badge).
-3. In the Copilot sidebar, hover over **Agents** and click **+ New agent**.
-   Open [`skills/quizwrangler-csv/SKILL.md`](https://github.com/velthuis/quizwrangler/blob/main/skills/quizwrangler-csv/SKILL.md), copy everything *below* the closing `---` of the frontmatter block, and paste it as the agent's instructions.
-   (The frontmatter is specific to Code and Cowork environments; Copilot has no use for it.)
-4. Name the agent, save it, then upload or paste your questions.
+For either agent, under **Configure → Capabilities**, turn on **Create documents, charts, and code**. This lets the CSV agent create a downloadable `.csv` file and lets the QTI agent create a ZIP and run Python checks.
 
-Agent creation may require a Copilot license tier your institution has to enable; if you can't find it, ask your IT group.
+For a CSV agent, add D2L's [Import questions into the Question Library guide](https://community.d2l.com/brightspace/kb/articles/5039-import-questions-into-the-question-library) as a web knowledge source. Instruct the agent to create a downloadable `.csv` file, flag ambiguity rather than guessing, and follow the Brightspace CSV format.
+
+For a QTI agent:
+
+1. In Copilot Agent Builder, create a new agent and give it concise package-generation instructions.
+2. Add these four public QuizWrangler knowledge pages as web knowledge sources:
+   - [QTI package profile](https://velthuis.github.io/quizwrangler/qti-package-profile/)
+   - [QTI standard item patterns](https://velthuis.github.io/quizwrangler/qti-standard-items/)
+   - [QTI advanced item patterns](https://velthuis.github.io/quizwrangler/qti-advanced-items/)
+   - [QTI formatting and media](https://velthuis.github.io/quizwrangler/qti-formatting-media/)
+3. Keep the instructions focused on the agent's role and workflow. Use the knowledge pages for QTI format details and item patterns, not as a substitute for the agent's instructions.
+
+Agent creation and web knowledge sources may require a Copilot license or administrator approval. If you cannot create an agent or add the pages, ask your IT group.
 
 </details>
 
 <details>
 <summary><b>Any other assistant</b></summary>
 
-The skill is a portable system prompt with nothing platform-specific in the body.
-Paste its text as a system prompt, custom instruction, or project instruction anywhere and it will work; delete the YAML frontmatter, which exists only so Claude Code and Codex can find the skill by name or description.
+The CSV skill can be pasted as a standalone system prompt after removing its YAML frontmatter. The QTI skill uses bundled reference files, so use its complete folder or Release ZIP in an environment that supports skill bundles.
 
 </details>
 
@@ -217,43 +230,49 @@ Answer: photosynthesis
 
 You should get back a small CSV with three question blocks (multiple choice, true/false, short answer), ready to save and upload to Brightspace.
 
+To test the complete-package path, use the following prompt:
+
+```text
+Use the quizwrangler-qti skill to build one QTI ZIP containing a pool consisting of these questions, which draws one at random:
+
+1. T/F: Water freezes at 0 degrees Celsius. (true)
+2. Arithmetic: Double {n}; n is an integer from 2 through 10; formula n*2.
+3. Arithmetic: Add 5 to {n}; n is an integer from 2 through 10; formula n+5.
+```
+
+The result should be a ZIP with a pool containing the three questions and drawing one of them, ready for the Course Admin import path below.
+
 ### The full test file
 
-The [`examples/`](examples/) directory holds a more extensive run to test the skill:
+The [`examples/`](examples/) directory holds more extensive runs for both skills:
 
 - `input/sample-questions-messy.txt`: a deliberately messy question document
 - `expected-output/sample-quiz.csv`: what the skill should produce from it
+- `input/sample-qti-messy.txt`: a complete mixed quiz with all supported types and a mixed pool
+- `expected-output/sample-qti-package.zip`: the corresponding synthetic QTI package
 - [`README.md`](examples/README.md): how to run it, plus what each planted problem is testing
 
-The input plants five traps: a question with two contradicting answer keys, an answer that expires in Fall 2026, a lost answer key, a bonus label CSV cannot encode, and an algorithmic question CSV can't express.
-A correct run produces eight question blocks and five flags: three questions excluded outright, plus two converted but flagged (the expiring answer, and the bonus question with a post-import to-do).
-Eleven clean questions with no flags means the skill guessed, which is exactly what the test file exists to detect.
-See the [examples README](examples/README.md) for step-by-step instructions and the full trap key.
+The CSV input includes several deliberate traps: a question with two contradicting answer keys, an answer that expires in Fall 2026, a lost answer key, a bonus label CSV cannot encode, and an algorithmic question CSV can't express. A correct CSV run produces eight question blocks and five flags. See the [examples README](examples/README.md) for the individual traps and expected handling.
 
 ---
 
 ## Importing to Brightspace
 
-The generated CSV can be uploaded through either of two menus, depending on where you want the questions to land:
+Use the menu that matches the generated format:
 
-| Import through | Questions land in |
-|---|---|
-|  **New Quiz → Add Existing → Upload a File** | The quiz you're building |
-|  **Question Library → Import → Upload a File** | The Question Library |
+| Format | Import through | Result |
+|---|---|---|
+| CSV | **New Quiz → Add Existing → Upload a File** | Questions in the quiz being built |
+| CSV | **Question Library → Import → Upload a File** | Reusable Question Library questions |
+| QTI ZIP | **Course Admin → Import/Export/Copy Components** | A complete quiz containing fixed questions and pools |
 
-Import into the Question Library if you want the questions reusable across quizzes; questions imported into a single quiz are not in the Question Library automatically.
-
-Do not upload the CSV through **Course Admin → Import/Export/Copy Components**: that importer only accepts course packages, and the CSV upload would fail.
+For immediate reuse across quizzes, import questions directly into the Question Library. Questions first imported into a quiz can also be added to the Question Library later.
 
 ---
 
 ## Features & Limitations
 
-**Correctness:** Neither the skill nor the validator can tell whether an answer key is *true*, only whether the file is well-formed.
-
-**CSV import cannot represent** algorithmic/calculated, fill-in-the-blanks, or multi-short-answer questions.
-Brightspace's own editor supports all three; they just can't be batch-imported through CSV.
-The skill flags them with a spec you can enter in the editor by hand.
+**QTI covers the complete supported set:** True/False, Multiple Choice, Multi-Select, Short Answer, Long Answer, Matching, Ordering, Arithmetic, Fill in the Blanks, and Multi-Short Answer. A random pool can mix these types in one ZIP. Requests for significant-figure grading are represented as Arithmetic with percent tolerance rather than a separate item type.
 
 **Formatting in your source is read, not discarded.**
 Bold or highlighting that marks the correct answer sets the answer key and is then dropped, while formatting that belongs to the question itself is carried through into the CSV.
@@ -265,36 +284,52 @@ Everything else the CSV format does support is covered:
 - hints,
 - HTML formatting (bold, lists, sub- and superscripts) in question text, options, hints, and feedback,
 - equations, written as MathML, in any of those same fields,
-- images,
 - partial credit,
-- regular-expression answer matching,
-- `EquallyWeighted`, `AllOrNothing`, and `RightMinusWrong` scoring modes.
+- various scoring modes,
+- regular-expression answer matching.
 
-**Formulas in flagged algorithmic specs use only what D2L's question editor accepts:** `+ - * / ^`, parentheses, and the documented functions `abs`, `cos`, `sin`, `tan`, `sqr` (not `sqrt`!), `log` (base 10), `ln`, and the constants `pi`/`e`.
-Anything else fails in the editor, including any rounding function; rounding is the precision setting's job instead.
+### Limitations
 
-**Brightspace instances may differ.**
-There is no guarantee that all features will work on every institution's D2L implementation.
+**Correctness:** Neither the skill nor the validator can tell whether an answer key is *factually correct*, only whether the file is well-formed.
+
+**CSV import cannot represent** Arithmetic, Fill in the Blanks, or Multi-Short Answer. The CSV skill flags them with a structured spec that `quizwrangler-qti` can package.
+
+**Arithmetic formulas are limited to the following operations:** `+ - * / ^`, parentheses, `abs`, `cos`, `sin`, `tan`, `sqr`, `log`, `ln`, `pi`, and `e`. Rounding is represented by the precision setting rather than a formula function.
+
+**Brightspace instances may differ.** There is no guarantee that all features will work on every institution's D2L implementation.
+
+## External references
+
+- [Brightspace Quiz developer reference](https://docs.valence.desire2learn.com/res/quiz.html): quiz fields, question types, enumerations, and grading options.
+- [Creating Question Library questions](https://community.d2l.com/brightspace/kb/articles/2800-creating-question-library-questions): authoring choices for Brightspace question types.
+- [Import questions into the Question Library](https://community.d2l.com/brightspace/kb/articles/5039-import-questions-into-the-question-library): CSV format and upload workflow.
+- [Import, export, or copy course components](https://community.d2l.com/brightspace/kb/articles/16788-import-export-or-copy-course-components): package import workflow.
+- [1EdTech QTI 1.2 information model](https://www.imsglobal.org/question/qtiv1p2/imsqti_asi_infov1p2.html): the assessment, section, item, and response model behind QTI 1.2.
+- [Brightspace Quiz Question Converter](https://community.d2l.com/brightspace/kb/articles/4161-quiz-question-converter): D2L's CSV question-bank conversion tool.
 
 ---
 
 ## Bonus: validate before you upload
 
-A small Python script checks a generated CSV before you hand it to Brightspace.
+A pair of Python scripts checks generated CSV and QTI files before you hand them to Brightspace.
 It is optional but useful: Brightspace reports import problems vaguely or not at all, and a malformed CSV can import "successfully" with questions missing or mis-scored, which can then go unnoticed.
 
-[`tools/validate_csv.py`](tools/validate_csv.py) catches unquoted commas, multi-select rows scored 100/0 instead of 1/0 (the most common import failure), multiple correct answers on a single-answer question, smart quotes, and malformed block structure.
+[`tools/validate_csv.py`](tools/validate_csv.py) catches unquoted commas, multi-select rows scored 100/0 instead of 1/0, multiple correct answers on a single-answer question, smart quotes, and malformed block structure.
+
+[`tools/validate_qti.py`](tools/validate_qti.py) checks archive layout, BOMs, XML, cross-file orgunit identifiers, media references, pool structure, item response shapes, and Arithmetic formulas.
 
 macOS or Linux:
 
 ```bash
 python3 tools/validate_csv.py my-quiz.csv
+python3 tools/validate_qti.py my-quiz.zip
 ```
 
 Windows (PowerShell or Command Prompt), where the interpreter is usually `python`:
 
 ```powershell
 python tools\validate_csv.py my-quiz.csv
+python tools\validate_qti.py my-quiz.zip
 ```
 
 Python 3.8+, standard library only, nothing to install.
@@ -309,10 +344,18 @@ Exit code 0 means clean; `--strict` turns warnings into errors.
 
 QuizWrangler grew out of **Beyond Prompts: Reusable AI Workflows for Teaching**, a session I presented at the VITAL Teaching & Learning Strategies Program at Villanova University in May 2026.
 
-Further reading: Ethan Mollick, [*Real AI Agents and Real Work*](https://www.oneusefulthing.org/p/real-ai-agents-and-real-work).
+For a broader discussion on leveraging AI tools, particularly in academia, I recommend checking out Ethan Mollick's article <a href="https://www.oneusefulthing.org/p/real-ai-agents-and-real-work" target="_blank">*Real AI Agents and Real Work*</a>.
 
 ## License
 
 [MIT](LICENSE).
 Use it, fork it, adapt it for your institution.
 If you cite it, see [CITATION.cff](CITATION.cff).
+
+## Trademark notice
+
+QuizWrangler is an independent project. It is not affiliated with, sponsored,
+endorsed, or approved by D2L Corporation.
+
+All D2L marks are trademarks of D2L Corporation. Please visit
+[D2L.com/trademarks](https://www.d2l.com/trademarks/) for a list of D2L marks.

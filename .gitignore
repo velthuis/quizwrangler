@@ -6,6 +6,8 @@
 # AI
 .claude/
 CLAUDE.md
+.agents/
+AGENTS.md
 
 # Python
 __pycache__/
@@ -20,8 +22,10 @@ scratch/
 
 # Build output (attached to Releases, not committed)
 dist/
+_site/
 
 # Local working materials
+.obsidian/
 backup/
 docs/
 temp/

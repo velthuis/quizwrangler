@@ -1,0 +1,4 @@
+interface:
+  display_name: "QuizWrangler QTI"
+  short_description: "Build complete Brightspace QTI quiz packages"
+  default_prompt: "Use $quizwrangler-qti to turn these questions into a complete QTI quiz package."

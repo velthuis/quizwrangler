@@ -18,7 +18,13 @@ import sys
 
 HEADER_ROWS = ["NewQuestion", "Title", "QuestionText", "Points", "Difficulty"]
 VALID_TYPES = {"MC", "TF", "WR", "SA", "MS", "M", "O"}
-VALID_SCORING = {"RightAnswers", "AllOrNothing", "RightMinusWrong", "EquallyWeighted"}
+VALID_SCORING = {
+    "RightAnswers",
+    "AllOrNothing",
+    "RightMinusWrong",
+    "EquallyWeighted",
+    "CorrectAnswersLimitedSelections",
+}
 
 # Rows that may appear in any question block regardless of type.
 OPTIONAL_ROWS = {"ID", "Image", "Hint", "Feedback", "InitialText", "AnswerKey"}
@@ -109,7 +115,7 @@ def check_unquoted_commas(lineno, raw, rep):
 
     Brightspace rows are 5 columns. A row parsing to more than 5 fields means a
     value contained a comma and was not wrapped in quotes -- it silently became
-    an extra column. This is the single most common data-corrupting mistake.
+    an extra column.
     """
     fields = parse_row(raw)
     if len(fields) > 5 and '"' not in raw:
@@ -314,7 +320,7 @@ def check_body(block, qtype, rep):
     elif qtype == "MS":
         scoring = [f for _, f in rows if f and f[0] == "Scoring"]
         if not scoring:
-            rep.warn(lineno0, "MS question has no 'Scoring,RightAnswers' row")
+            rep.warn(lineno0, "MS question has no 'Scoring,AllOrNothing' row")
         options = [(ln, f) for ln, f in rows if f and f[0] == "Option"]
         if not options:
             rep.error(lineno0, "MS question has no Option rows")

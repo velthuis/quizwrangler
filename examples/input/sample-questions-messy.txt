@@ -49,7 +49,6 @@ example to support your view.
 - Navy and gold
 - Green and white
 (Note to self — I think I lost the answer key for this one, need to double-check before posting)
-Make Blue, Navy, Gold and Green colored text in the question.
 
 Q8
 Approximately how many undergraduate students are enrolled at Villanova University?
@@ -66,6 +65,8 @@ Which of the following are current Big East Conference schools? (select all that
 ☑ Marquette
 ☐ Notre Dame
 ☐ Syracuse
+Make Villanova blue, Georgetown navy, Marquette blue, Notre Dame green, Syracuse orange.
+Use Correct Selections scoring, with partial credit for each correct selection.
 
 BONUS QUESTION:
 10. (numerical fill-in)

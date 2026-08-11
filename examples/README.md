@@ -1,14 +1,16 @@
 # Test file and worked example
 
-This section describes an application of the skill over a **deliberately broken** test file.
-It is useful for checking that the skill is loaded and behaves as expected before you point it at real course material. 
-The skill should convert a messy list of questions into **an importable CSV file** and **flag any problems** it finds instead of quietly guessing at them.
+This directory contains deliberately imperfect test files and worked examples for QuizWrangler's two skills. Use them to check that a skill is loaded and behaving as expected before you use it with real course material.
 
-## Files
+The CSV example converts a messy list of standard questions into an importable CSV file and flags problems instead of guessing. The QTI example creates one complete ZIP package containing standard and advanced question types, a random pool, formatting, and an embedded image.
+
+A result with flags can be correct: the skills should preserve uncertainty rather than invent missing information.
+
+## CSV test file and expected output
 
 ```
 input/sample-questions-messy.txt    11 questions, deliberately messy
-expected-output/sample-quiz.csv     8 CSV question blocks + a 5-entry FLAGS section
+expected-output/sample-quiz.csv     8 CSV question blocks + a FLAGS section with 5 entries
 ```
 
 ## Run it
@@ -18,22 +20,22 @@ With the skill [installed](../README.md#install), ask your assistant to use the 
 > Use the quizwrangler-csv skill on the questions below.
 
 and paste the contents of `input/sample-questions-messy.txt` underneath.
-(In some environments, you can also type `/quizwrangler-csv` and paste the questions after it.)
+(In some environments, you can also type `/quizwrangler-csv` or `$quizwrangler-csv` and paste the questions after it.)
 
 See [the test file](#the-test-file-what-each-planted-problem-tests) section for details on what each one of the 11 proposed quiz questions tests.
 
 ### Expected output
 
 You should get **8 question blocks and a `//FLAGS:` section** (covering Q1, Q5, Q7, Q10, and Q11).
-Q5 and Q10 are converted but still flagged: Q5's answer expires in Fall 2026, and Q10's bonus label is not a CSV field.
-Q1, Q7, and Q11 are left out of the CSV entirely: two contradicting answer keys, a missing answer key, and a question type CSV cannot represent.
-Q11's flag carries a full spec the instructor can enter by hand in Brightspace's question editor.
+Q5 and Q10 are converted but still flagged, because Q5's answer expires in Fall 2026, and Q10's bonus label is not a CSV-processable field.
+Q1, Q7, and Q11 are left out of the CSV entirely, because of contradicting answer keys, a missing answer key, and a question type CSV cannot represent.
+Q11's flag carries a full spec that `quizwrangler-qti` can process and package or the instructor can enter by hand.
 
 Compare your result against `expected-output/sample-quiz.csv`.
 
 ## (Optional) Validate output
 
-Save the assistant's output to a file, then check that it is well-formed. Run this from the repo root, using the name you saved it under:
+Save the assistant's output to a file, then check that it is well-formed. Run this script from the repo root, using the name you saved it under:
 
 ```bash
 python3 tools/validate_csv.py your-saved-quiz.csv
@@ -51,9 +53,9 @@ The script will merely check against common structural pitfalls, not whether the
 | 4 | Numbered options `1)–4)`, answer given as `(answer = #2)`; motto contains commas *and* quotes | Non-letter numbering, plus the CSV quoting rule | Import as `MC`, fields with commas wrapped in quotes |
 | 5 | Note says the answer changes to Vic Maggitti Hall in Fall 2026 | Does it notice an answer with an expiry date? | **Flag** as time-dependent, encode the current answer |
 | 6 | Bare `ESSAY` header, no options | Recognising a written-response item with no answer rows | Import as `WR`, block ends after `Difficulty` |
-| 7 | "I think I lost the answer key for this one", plus a request to color the answer text | Will it invent a plausible answer? And does the formatting request distract it from the missing key? | **Flag.** Exclude; never guess. Carry the colored-text request in the flag for when the question is re-created. |
+| 7 | "I think I lost the answer key for this one" | Will it invent a plausible answer? | **Flag.** Exclude; never guess. |
 | 8 | Roman-numeral options `i.–iv.`, answer marked `→ ii` | Unusual numbering; also a type-preservation test | Import as `MC`; see the warning below |
-| 9 | Checkbox notation `☑`/`☐`, "select all that apply" | Multi-select detection, and the 1/0 scoring rule | Import as `MS` with `Option,1`, **not** `100` |
+| 9 | Checkbox notation `☑`/`☐`, "select all that apply", requested colors for each option, and Correct Selections scoring | Multi-select detection, 1/0 scoring, requested partial-credit scoring, and option-level HTML formatting | Import as `MS` with `Scoring,RightAnswers`, `Option,1` for correct choices, and each option as marked HTML |
 | 10 | Numeric fill-in under a "BONUS QUESTION:" header, answer `3` with supporting detail | Short answer with multiple accepted forms, plus a setting CSV cannot encode | Import as `SA`, accept `3`, `three`, `Three`; **flag** a post-import to-do to enable Bonus (label stripped from the stem) |
 | 11 | Algorithmic question; formula written as `round(n × p / 100)`, with a `×` and a banned `round()` | Two traps: a type CSV cannot represent at all, and a formula needing translation (`round()` belongs in the precision setting, `×` must become `*`) | **Flag** with a full spec for manual entry: formula `({n}*{p}/100)`, precision 0 decimal places not enforced, tolerance 1 units |
 
@@ -90,4 +92,46 @@ diff test-run.csv examples/expected-output/sample-quiz.csv
 python3 tools/validate_csv.py test-run.csv --strict
 ```
 
-`--permission-mode acceptEdits` is required to allow a headless run to save the output without access to an interactive "allow write?" prompt.
+`--permission-mode acceptEdits` is needed to allow a headless run to save the output without access to an interactive "allow write?" prompt.
+
+---
+
+## QTI test file and expected output
+
+The QTI example exercises the complete-package workflow:
+
+```text
+input/sample-qti-messy.txt             mixed source questions and a pool
+input/sample-chart.png                 image used by one question
+expected-output/sample-qti-package.zip expected complete package
+```
+
+Run it with a prompt along the lines of the following:
+
+> Use the quizwrangler-qti skill to convert examples/input/sample-qti-messy.txt into one QTI ZIP. Keep all fixed questions and the mixed pool together, and include examples/input/sample-chart.png where requested.
+
+The full expected package contains fixed examples of all ten supported item types and a pool that draws two candidates from four:
+
+| Coverage | Expected handling |
+|---|---|
+| True/False and Multiple Choice | Preserve source order and key the stated answer |
+| Multi-Select | Keep both correct selections and question feedback |
+| Short Answer and Long Answer | Use a text box appropriate to each response |
+| Matching and Ordering | Preserve the supplied relationships and correct sequence |
+| Arithmetic | Copy the calculation formula into both the presentation field and the scoring rule; use `units` tolerance |
+| Fill in the Blanks | Place the answer box inside the sentence |
+| Multi-Short Answer | Use two boxes with any accepted answer allowed in either |
+| Mixed pool | Keep Multiple Choice, True/False, Arithmetic, and Fill in the Blanks candidates in the same random section |
+| Formatting and MathML | Carry meaningful formatting as escaped HTML; use plain MathML for equations |
+| Embedded image | Copy the supplied PNG into `quizzing/` under a synthetic identifier and reference it from the item |
+| Instructor note | Do not convert the final note-to-self into a question |
+
+The committed packages are synthetic structural examples. They contain no course identifiers, export UUIDs, or platform submission prose.
+
+## (Optional) Validate output
+
+From the repository root, run the following script to check the ZIP for common errors that could prevent Brightspace from importing it:
+
+```bash
+python3 tools/validate_qti.py examples/expected-output/sample-qti-package.zip --strict
+```

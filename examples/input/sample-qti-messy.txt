@@ -1,0 +1,54 @@
+Remarkable Animals Field Quiz. Keep all questions together in one QTI ZIP.
+
+1) TRUE/FALSE
+A platypus is a mammal that lays eggs. TRUE.
+
+2) Use sample-chart.png above the question. The chart shows dinosaur footprints
+recorded at three field sites.
+Which sequence of footprint counts matches the chart?
+* 2, 4, and 6 footprints
+* 1, 3, and 5 footprints
+* 3, 6, and 9 footprints
+Correct: first option.
+
+3) Select every trait that applies to an axolotl. Please keep "axolotl" bold for students.
+[x] It retains external gills as an adult
+[x] It can regenerate lost limbs
+[ ] It has feathers
+Feedback: Axolotls retain external gills and can regenerate limbs; they do not have feathers.
+
+4) Short answer with an inline equation: A museum display contains 2 real fossils and
+2 replica fossils. Render the expression as MathML. How many objects are in the display?
+Answer: 4.
+
+5) Written response: Explain how an axolotl's external gills help it live in an aquatic habitat.
+Show the prompt as a paragraph and give a ten-line answer box.
+
+6) Match each formula from an aquatic-habitat lab to its name:
+H2O -> water (the 2 must be subscript)
+CO2 -> carbon dioxide (the 2 must be subscript)
+
+7) Put these basic dinosaur life stages in order:
+Egg, Hatchling, Adult.
+
+8) Arithmetic. Each display case contains two dinosaur eggs. If the museum prepares
+{n} display cases, how many eggs are displayed?
+n is an integer from 2 through 10. Formula n*2. Precision 0. Tolerance 0 units.
+Hint: Each display case contains <em>two</em> eggs.
+
+9) Fill in the blank: An adult axolotl retains its external ______.
+Answer: gills. Ignore capitalization.
+
+10) Multi-short-answer: Name the two kinds of living monotremes. Two boxes.
+Accept platypus or echidna in either box.
+
+POOL: Animal Adaptations Check. Draw 2 of the following 4. Each drawn question is 2 points.
+
+a) Multiple choice: Which animal is a monotreme?
+River otter, *platypus, beaver.
+b) True/False: An axolotl is an amphibian. True.
+c) Arithmetic: Each fossil case holds three dinosaur eggs. For {n} cases, calculate the number of eggs;
+n is an integer from 2 through 10; formula n*3.
+d) Fill in the blank: Triceratops lived during the Late ______ Period. Answer: Cretaceous.
+
+Instructor note: still need to write one more question later.

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build upload-ready skill ZIPs for Claude Desktop / claude.ai.
+"""Build upload-ready skill ZIPs for OpenAI and Anthropic skill hosts.
 
-Claude's skill uploader wants a ZIP whose root is a single folder named after
-the skill, with SKILL.md inside it. GitHub's "Download ZIP" does not produce
-that shape -- it wraps everything in a <repo>-<branch>/ folder -- so these are
-built here and attached to each GitHub Release.
+Skill uploaders expect a ZIP whose root is a single folder named after the
+skill, with SKILL.md inside it. GitHub's "Download ZIP" does not produce that
+shape -- it wraps everything in a <repo>-<branch>/ folder -- so these are built
+here and attached to each GitHub Release.
 
 Usage:
     python3 tools/build_skill_zips.py          # writes dist/*.zip
@@ -43,7 +43,12 @@ def collect(skill_dir):
     """Every file in the skill, sorted for reproducible archives."""
     return sorted(
         p for p in skill_dir.rglob("*")
-        if p.is_file() and p.name != ".DS_Store"
+        if (
+            p.is_file()
+            and p.name != ".DS_Store"
+            and p.suffix != ".pyc"
+            and "__pycache__" not in p.parts
+        )
     )
 
 
