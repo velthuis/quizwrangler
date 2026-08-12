@@ -18,6 +18,8 @@ PAGES = {
     "qti-formatting-media": ("QTI formatting and media", "formatting-media.md"),
 }
 
+BING_SITE_VERIFICATION = '<meta name="msvalidate.01" content="7F59707A2D884522BCA1C3B956DE365C" />'
+
 
 def inline_markdown(text: str) -> str:
     """Render the small inline Markdown subset used by the references."""
@@ -156,6 +158,7 @@ def page(title: str, content: str) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {BING_SITE_VERIFICATION}
   <title>{html.escape(title)} | QuizWrangler</title>
   <style>
     body {{ font-family: system-ui, sans-serif; line-height: 1.5; margin: 2rem auto; max-width: 72rem; padding: 0 1rem; }}
@@ -186,10 +189,12 @@ def main() -> None:
         links.append(f'<li><a href="{slug}/">{html.escape(title)}</a></li>')
 
     index = """<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{}
 <title>QuizWrangler QTI knowledge</title></head><body><main>
 <h1>QuizWrangler QTI knowledge</h1>
 <p>Reference material for the QuizWrangler Brightspace QTI agent.</p>
-<ul>{}</ul></main></body></html>""".format("".join(links))
+<ul>{}</ul></main></body></html>""".format(BING_SITE_VERIFICATION, "".join(links))
     (OUTPUT / "index.html").write_text(index, encoding="utf-8")
 
 
