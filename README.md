@@ -298,15 +298,6 @@ Everything else the CSV format does support is covered:
 
 **Brightspace instances may differ.** There is no guarantee that all features will work on every institution's D2L implementation.
 
-## External references
-
-- [Brightspace Quiz developer reference](https://docs.valence.desire2learn.com/res/quiz.html): quiz fields, question types, enumerations, and grading options.
-- [Creating Question Library questions](https://community.d2l.com/brightspace/kb/articles/2800-creating-question-library-questions): authoring choices for Brightspace question types.
-- [Import questions into the Question Library](https://community.d2l.com/brightspace/kb/articles/5039-import-questions-into-the-question-library): CSV format and upload workflow.
-- [Import, export, or copy course components](https://community.d2l.com/brightspace/kb/articles/16788-import-export-or-copy-course-components): package import workflow.
-- [1EdTech QTI 1.2 information model](https://www.imsglobal.org/question/qtiv1p2/imsqti_asi_infov1p2.html): the assessment, section, item, and response model behind QTI 1.2.
-- [Brightspace Quiz Question Converter](https://community.d2l.com/brightspace/kb/articles/4161-quiz-question-converter): D2L's CSV question-bank conversion tool.
-
 ---
 
 ## Bonus: validate before you upload
@@ -337,8 +328,16 @@ If Windows opens the Microsoft Store when you type `python`, install Python from
 
 Exit code 0 means clean; `--strict` turns warnings into errors.
 
-
 ---
+
+## External references
+
+- [Brightspace Quiz developer reference](https://docs.valence.desire2learn.com/res/quiz.html): quiz fields, question types, enumerations, and grading options.
+- [Creating Question Library questions](https://community.d2l.com/brightspace/kb/articles/2800-creating-question-library-questions): authoring choices for Brightspace question types.
+- [Import questions into the Question Library](https://community.d2l.com/brightspace/kb/articles/5039-import-questions-into-the-question-library): CSV format and upload workflow.
+- [Import, export, or copy course components](https://community.d2l.com/brightspace/kb/articles/16788-import-export-or-copy-course-components): package import workflow.
+- [1EdTech QTI 1.2 information model](https://www.imsglobal.org/question/qtiv1p2/imsqti_asi_infov1p2.html): the assessment, section, item, and response model behind QTI 1.2.
+- [Brightspace Quiz Question Converter](https://community.d2l.com/brightspace/kb/articles/4161-quiz-question-converter): D2L's CSV question-bank conversion tool.
 
 ## Background
 
