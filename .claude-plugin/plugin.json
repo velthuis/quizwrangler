@@ -1,0 +1,23 @@
+{
+  "name": "quizwrangler",
+  "displayName": "QuizWrangler",
+  "version": "1.1.0",
+  "description": "Turns messy questions into clean Brightspace imports: a CSV for standard question banks, or a complete QTI quiz package with pools, advanced question types, equations, and images. Flags contradictory or missing answer keys instead of guessing.",
+  "author": {
+    "name": "Raisa Velthuis",
+    "url": "https://github.com/velthuis"
+  },
+  "homepage": "https://github.com/velthuis/quizwrangler",
+  "repository": "https://github.com/velthuis/quizwrangler",
+  "license": "MIT",
+  "icon": ".claude-plugin/icon.png",
+  "keywords": [
+    "brightspace",
+    "d2l",
+    "quiz",
+    "qti",
+    "csv",
+    "question-bank",
+    "education"
+  ]
+}
