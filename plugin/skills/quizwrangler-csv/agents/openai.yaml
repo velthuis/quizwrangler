@@ -1,0 +1,4 @@
+interface:
+  display_name: "QuizWrangler CSV"
+  short_description: "Build Brightspace CSV files from standard questions"
+  default_prompt: "Use $quizwrangler-csv to turn these questions into a Brightspace CSV file."
