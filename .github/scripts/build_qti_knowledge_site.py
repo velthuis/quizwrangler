@@ -9,7 +9,7 @@ import re
 
 
 ROOT = Path(__file__).resolve().parents[2]
-REFERENCES = ROOT / "skills" / "quizwrangler-qti" / "references"
+REFERENCES = ROOT / "plugin" / "skills" / "quizwrangler-qti" / "references"
 OUTPUT = ROOT / "_site"
 PAGES = {
     "qti-package-profile": ("QTI package profile", "package-profile.md"),

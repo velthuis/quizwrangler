@@ -82,7 +82,7 @@ You can then add the skill to your assistant by uploading the ZIP in the app's s
 > Use the Release file instead.
 
 
-- For every other path, you will need to obtain the skill folder inside `skills/` by one of two methods:
+- For every other path, you will need to obtain the skill folders inside `plugin/skills/` by one of two methods:
 
 1. Clone the repo
 ```bash
@@ -124,7 +124,7 @@ On Business or Enterprise workspaces an admin may need to enable them first; if 
 <details>
 <summary><b>Claude Code</b></summary>
 
-Copy both folders inside `skills/` into your skills directory. Two locations work:
+Copy both folders inside `plugin/skills/` into your skills directory. Two locations work:
 
 - **User-level**: `~/.claude/skills` in your home folder makes skills available in every folder you run Claude Code from. Use this if you expect to use the skill broadly.
 - **Project-level**: `.claude/skills` inside any one folder makes them available only when Claude Code runs in that folder. This is useful if you keep teaching material in one place and prefer a narrower scope.
@@ -133,14 +133,14 @@ User-level install, macOS or Linux (Terminal):
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -r quizwrangler/skills/* ~/.claude/skills/
+cp -r quizwrangler/plugin/skills/* ~/.claude/skills/
 ```
 
 User-level install, Windows (PowerShell):
 
 ```powershell
 New-Item -ItemType Directory -Force -Path "$HOME\.claude\skills"
-Copy-Item -Recurse -Force .\quizwrangler\skills\* "$HOME\.claude\skills\"
+Copy-Item -Recurse -Force .\quizwrangler\plugin\skills\* "$HOME\.claude\skills\"
 ```
 
 For a project-level install, use `<your folder>/.claude/skills` as the destination instead.
@@ -160,14 +160,14 @@ User-level install, macOS or Linux (Terminal):
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -r quizwrangler/skills/* ~/.codex/skills/
+cp -r quizwrangler/plugin/skills/* ~/.codex/skills/
 ```
 
 User-level install, Windows (PowerShell):
 
 ```powershell
 New-Item -ItemType Directory -Force -Path "$HOME\.codex\skills"
-Copy-Item -Recurse -Force .\quizwrangler\skills\* "$HOME\.codex\skills\"
+Copy-Item -Recurse -Force .\quizwrangler\plugin\skills\* "$HOME\.codex\skills\"
 ```
 
 When a skill includes `agents/openai.yaml`, it supplies OpenAI-facing display metadata and a default prompt. `SKILL.md`, references, and scripts define the skill's behavior.

@@ -78,7 +78,7 @@ The instructor ends up with a quiz that is three questions short and no indicati
 
 ## Automated run (Claude Code CLI)
 
-This route also needs the skill [installed](../README.md#install) first: the CLI reads it from `.claude/skills`, not from this repo's `skills/` folder.
+This route also needs the skill [installed](../README.md#install) first: the CLI reads it from `.claude/skills`, not from this repo's `plugin/skills/` folder.
 
 To run the whole thing without pasting anything, use the following commands from the **repo root**:
 

@@ -7,6 +7,7 @@ import pathlib
 
 VALIDATOR = (
     pathlib.Path(__file__).resolve().parent.parent
+    / "plugin"
     / "skills"
     / "quizwrangler-qti"
     / "scripts"

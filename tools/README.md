@@ -12,7 +12,7 @@ python3 tools/build_qti_examples.py              # rebuild the QTI example
 
 ## build_skill_zips.py
 
-Packages each folder in `skills/` into `dist/<skill-name>.zip`, shaped the way the skill uploaders expect: the skill folder at the ZIP root, named to match the `name:` in its frontmatter, with `SKILL.md` inside.
+Packages each folder in `plugin/skills/` into `dist/<skill-name>.zip`, shaped the way the skill uploaders expect: the skill folder at the ZIP root, named to match the `name:` in its frontmatter, with `SKILL.md` inside.
 
 This exists because GitHub's "Download ZIP" produces the wrong shape: it wraps everything in a `<repo>-<branch>/` folder.
 

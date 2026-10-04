@@ -20,7 +20,7 @@ import sys
 import zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-SKILLS_DIR = ROOT / "skills"
+SKILLS_DIR = ROOT / "plugin" / "skills"
 DIST_DIR = ROOT / "dist"
 
 
