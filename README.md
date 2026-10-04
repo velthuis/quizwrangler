@@ -242,6 +242,22 @@ Use the quizwrangler-qti skill to build one QTI ZIP containing a pool consisting
 
 The result should be a ZIP with a pool containing the three questions and drawing one of them, ready for the Course Admin import path below.
 
+To see how the skills handle a problem in the source, use this prompt:
+
+```text
+Use the quizwrangler-csv skill on the questions below.
+
+When was Villanova University founded?
+a. 1835
+b. 1842
+*c. 1859
+Correct answer: B
+
+T/F: Villanova University is in Pennsylvania. (true)
+```
+
+The CSV should contain only the true/false question. The founding-year question is listed in the FLAGS section instead, because the asterisk and the note mark different answers, and the skill asks you which one is correct rather than guessing.
+
 ### The full test file
 
 The [`examples/`](examples/) directory holds more extensive runs for both skills:
@@ -327,6 +343,16 @@ Python 3.8+, standard library only, nothing to install.
 If Windows opens the Microsoft Store when you type `python`, install Python from [python.org](https://www.python.org/downloads/) and tick **Add python.exe to PATH** during setup.
 
 Exit code 0 means clean; `--strict` turns warnings into errors.
+
+---
+
+## Troubleshooting
+
+- **A question is missing from the output.** Check the flags at the end of the reply or the file. Questions with a contradictory or missing answer key, or a type the format cannot carry, are left out on purpose. Fix the source question and convert it again.
+- **The skill doesn't run, or no file is created.** In Claude Desktop, Cowork, or claude.ai, turn on **Code execution and file creation** (see [Install](#install)). In Claude Code, the skills must be installed first.
+- **Brightspace rejects the file or imports fewer questions than expected.** Check that you used the import menu for that format (see [Importing to Brightspace](#importing-to-brightspace)). Then run the validator (see [Bonus: validate before you upload](#bonus-validate-before-you-upload)), paste its output back into the chat, and ask for a corrected file.
+- **Students see tags such as `<b>bold</b>` as text, or the Question Library fills with empty folders.** The CSV is malformed in a way that still imports. The validator warns about both; ask for a corrected file.
+- **Still stuck?** Open an issue on [GitHub](https://github.com/velthuis/quizwrangler/issues) with the validator output and a sample of the source questions. Leave out any student information.
 
 ---
 
