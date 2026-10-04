@@ -27,8 +27,8 @@ To import the result, use **Question Library → Import → Upload a File** or *
 
 ## What the plugin runs
 
-The QTI skill includes a Python validator script (standard library only) that runs locally on your computer and checks the finished ZIP file for common errors that could prevent Brightspace from importing it. 
+The QTI skill includes a Python validator script (standard library only) that Claude runs while building the package. It checks the finished ZIP file for common errors that could prevent Brightspace from importing it.
 
 > **Privacy note.**
-> Check your institution's policy on what information may be sent to which AI tools, and use an enterprise-protected tier when in doubt.
+> Check your institution's policy on what information may be sent to which AI tools.
 

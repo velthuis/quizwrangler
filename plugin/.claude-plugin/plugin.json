@@ -9,6 +9,8 @@
   },
   "homepage": "https://github.com/velthuis/quizwrangler",
   "repository": "https://github.com/velthuis/quizwrangler",
+  "documentationUrl": "https://github.com/velthuis/quizwrangler#readme",
+  "supportUrl": "https://github.com/velthuis/quizwrangler/issues",
   "license": "MIT",
   "icon": ".claude-plugin/icon.jpg",
   "keywords": [

@@ -206,7 +206,7 @@ The CSV skill can be pasted as a standalone system prompt after removing its YAM
 
 
 > **Privacy note.**
-> Check your institution's policy on what information may be sent to which AI tools, and use an enterprise-protected tier when in doubt.
+> Check your institution's policy on what information may be sent to which AI tools.
 
 ---
 
